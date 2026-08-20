@@ -1,414 +1,200 @@
 <!DOCTYPE html>
-<html lang="el">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Northbridge Advisory — Στρατηγική Συμβουλευτική Επιχειρήσεων</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --stone:#EDEAE2;
-    --stone-2:#E2DDD1;
-    --ink:#141C19;
-    --ink-soft:#3D4A44;
-    --ink-faint:#65706A;
-    --forest:#2F5D50;
-    --forest-dark:#1A362E;
-    --gold:#A87C1F;
-    --paper:#FBFAF7;
-    --line:rgba(20,28,25,0.14);
-    --bridge-line:rgba(251,250,247,0.5);
-  }
-  *{margin:0;padding:0;box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{background:var(--stone); color:var(--ink); font-family:'Work Sans',sans-serif;}
-  h1,h2,h3,.display{font-family:'Fraunces',serif; letter-spacing:-0.01em;}
-  .mono{font-family:'IBM Plex Mono',monospace; letter-spacing:0.03em;}
-  a{color:inherit; text-decoration:none;}
-  ul{list-style:none;}
-  .wrap{max-width:1160px; margin:0 auto; padding:0 32px;}
-  @media(max-width:640px){.wrap{padding:0 20px;}}
-  a:focus-visible, button:focus-visible{outline:2px solid var(--forest); outline-offset:3px;}
-  @media (prefers-reduced-motion: reduce){*{animation-duration:.001ms !important; transition-duration:.001ms !important; scroll-behavior:auto !important;}}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Northbridge Advisory — independent business strategy consulting for leaders navigating growth, transformation and complex decisions.">
+  <meta name="theme-color" content="#0a1512">
+  <title>Northbridge Advisory — Business Strategy & Consulting</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#f5f4ef; --surface:#fffefa; --ink:#0b1713; --muted:#65716c;
+      --forest:#123b30; --forest-2:#1b5947; --mint:#dcebe4; --gold:#c6a15b;
+      --line:rgba(11,23,19,.12); --white:#fbfcf9; --shadow:0 24px 70px rgba(11,23,19,.10);
+      --radius:20px; --max:1180px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased}
+    body.menu-open{overflow:hidden}
+    a{color:inherit;text-decoration:none}
+    button,input,textarea,select{font:inherit}
+    button{cursor:pointer}
+    .container{width:min(var(--max),calc(100% - 48px));margin:auto}
+    .eyebrow{display:inline-flex;align-items:center;gap:10px;color:var(--forest-2);font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
+    .eyebrow:before{content:'';width:30px;height:1px;background:var(--gold)}
+    .display{font-family:'Manrope',sans-serif;letter-spacing:-.055em;line-height:1.02}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:50px;padding:0 22px;border-radius:999px;font-size:14px;font-weight:700;border:1px solid transparent;transition:.25s ease}
+    .btn-primary{background:var(--forest);color:var(--white);box-shadow:0 10px 24px rgba(18,59,48,.18)}
+    .btn-primary:hover{background:#0d2d24;transform:translateY(-2px)}
+    .btn-light{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2);color:var(--white)}
+    .btn-light:hover{background:var(--white);color:var(--forest)}
+    .btn-ghost{background:transparent;border-color:var(--line);color:var(--ink)}
+    .btn-ghost:hover{border-color:var(--forest);background:var(--mint)}
+    .arrow{transition:transform .25s ease}.btn:hover .arrow{transform:translateX(3px)}
 
-  nav{position:fixed; top:0; left:0; right:0; z-index:100; padding:26px 0; transition:all .3s ease; color:var(--paper);}
-  nav.scrolled{background:rgba(251,250,247,0.94); backdrop-filter:blur(10px); padding:16px 0; border-bottom:1px solid var(--line); color:var(--ink);}
-  .nav-inner{display:flex; align-items:center; justify-content:space-between;}
-  .logo{font-family:'Fraunces'; font-weight:600; font-size:21px;}
-  .logo em{font-style:italic; color:#C9A94A;}
-  nav.scrolled .logo em{color:var(--forest);}
-  .nav-links{display:flex; gap:36px; font-size:14px; font-weight:500; color:rgba(251,250,247,0.8);}
-  nav.scrolled .nav-links{color:var(--ink-soft);}
-  .nav-links a:hover{color:var(--paper);}
-  nav.scrolled .nav-links a:hover{color:var(--ink);}
-  @media(max-width:880px){.nav-links{display:none;}}
-  .btn{display:inline-flex; align-items:center; justify-content:center; padding:13px 26px; border-radius:3px; font-size:14px; font-weight:600; cursor:pointer; border:none; transition:all .2s ease;}
-  .btn-primary{background:var(--forest); color:var(--paper);}
-  .btn-primary:hover{background:var(--forest-dark);}
-  .btn-outline{background:transparent; border:1px solid var(--ink); color:var(--ink);}
-  .btn-outline:hover{background:var(--ink); color:var(--paper);}
+    /* NAV */
+    header{position:fixed;inset:0 0 auto;z-index:50;padding:18px 0;transition:.3s ease}
+    header.scrolled{padding:10px 0;background:rgba(245,244,239,.88);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+    .nav{height:62px;display:flex;align-items:center;justify-content:space-between}
+    .brand{display:flex;align-items:center;gap:11px;font-family:'Manrope';font-weight:800;font-size:18px;letter-spacing:-.03em}
+    .brand-mark{width:35px;height:35px;border:1px solid rgba(255,255,255,.45);border-radius:50%;display:grid;place-items:center;position:relative;overflow:hidden}
+    .brand-mark:before,.brand-mark:after{content:'';position:absolute;height:1px;background:currentColor;transform:rotate(-35deg);width:42px}
+    .brand-mark:after{transform:rotate(35deg);opacity:.45}
+    header:not(.scrolled){color:var(--white)}
+    header.scrolled .brand-mark{border-color:var(--line)}
+    .links{display:flex;align-items:center;gap:30px;font-size:13px;font-weight:600}
+    .links a{opacity:.76;transition:.2s}.links a:hover{opacity:1}
+    .nav-cta{min-height:42px;padding:0 18px}
+    .menu-toggle{display:none;width:44px;height:44px;border:1px solid var(--line);border-radius:50%;background:transparent;color:currentColor}
+    .mobile-menu{display:none}
 
-  /* HERO */
-  .hero{
-    padding:210px 0 90px; position:relative; overflow:hidden; color:var(--paper);
-    background:
-      radial-gradient(ellipse 900px 500px at 85% -10%, rgba(168,124,31,0.22), transparent 60%),
-      linear-gradient(165deg,#0F1714 0%,#1A362E 55%,#254A40 100%);
-  }
-  .bridge-art{position:absolute; inset:0; z-index:0; pointer-events:none; opacity:0.9;}
-  .bridge-art svg{position:absolute; bottom:-4%; left:0; width:100%; height:auto;}
-  .hero-grain{position:absolute; inset:0; z-index:1; opacity:0.05; pointer-events:none;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
-  .hero-inner{position:relative; z-index:2; display:grid; grid-template-columns:1.15fr 0.85fr; gap:60px; align-items:end;}
-  @media(max-width:900px){.hero-inner{grid-template-columns:1fr; gap:36px;}}
-  .eyebrow{display:flex; align-items:center; gap:10px; font-family:'IBM Plex Mono'; font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:#D9B65C; margin-bottom:26px;}
-  .eyebrow::before{content:''; width:28px; height:1px; background:#D9B65C;}
-  .hero h1{font-size:clamp(40px,5.4vw,68px); font-weight:500; line-height:1.06; margin-bottom:26px; color:var(--paper);}
-  .hero h1 em{font-style:italic; color:#D9B65C;}
-  .hero-side p{font-size:16.5px; color:rgba(251,250,247,0.82); line-height:1.7; margin-bottom:28px;}
-  .hero-actions{display:flex; gap:14px; flex-wrap:wrap;}
-  .hero-actions .btn-outline{border-color:rgba(251,250,247,0.4); color:var(--paper);}
-  .hero-actions .btn-outline:hover{background:var(--paper); color:var(--forest-dark);}
-  .hero-strip{position:relative; z-index:2; margin-top:80px; padding-top:36px; border-top:1px solid rgba(251,250,247,0.18); display:flex; justify-content:space-between; flex-wrap:wrap; gap:24px;}
-  .strip-item .num{font-family:'Fraunces'; font-size:34px; font-weight:500; color:#D9B65C;}
-  .strip-item .label{font-size:12.5px; color:rgba(251,250,247,0.6); margin-top:4px; max-width:160px;}
+    /* HERO */
+    .hero{min-height:760px;display:flex;align-items:center;position:relative;overflow:hidden;background:radial-gradient(circle at 82% 18%,rgba(198,161,91,.20),transparent 28%),linear-gradient(135deg,#08110e 0%,#0d2a21 48%,#123f32 100%);color:var(--white);padding:150px 0 90px}
+    .hero:after{content:'';position:absolute;inset:auto -10% -38% -10%;height:70%;background:radial-gradient(ellipse at center,rgba(86,148,124,.18),transparent 64%);pointer-events:none}
+    .grid-lines{position:absolute;inset:0;opacity:.10;background-image:linear-gradient(rgba(255,255,255,.15) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.15) 1px,transparent 1px);background-size:80px 80px;mask-image:linear-gradient(to bottom,black,transparent 80%)}
+    .hero-orbit{position:absolute;width:650px;height:650px;border:1px solid rgba(255,255,255,.10);border-radius:50%;right:-130px;top:80px}.hero-orbit:before{content:'';position:absolute;inset:70px;border:1px solid rgba(255,255,255,.07);border-radius:50%}
+    .hero-content{position:relative;z-index:2;max-width:850px}
+    .hero .eyebrow{color:#b9d9cc;margin-bottom:28px}.hero .eyebrow:before{background:var(--gold)}
+    h1{font-size:clamp(48px,7vw,86px);max-width:900px;margin-bottom:28px}
+    h1 .accent{color:#d7b873;font-style:italic}
+    .hero-copy{max-width:650px;color:rgba(251,252,249,.72);font-size:18px;line-height:1.75;margin-bottom:36px}
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+    .hero-proof{margin-top:80px;display:flex;gap:0;max-width:780px;border-top:1px solid rgba(255,255,255,.14);padding-top:25px}
+    .proof{flex:1;padding-right:28px;border-right:1px solid rgba(255,255,255,.12)}.proof:last-child{border:0;padding-left:28px}
+    .proof strong{display:block;font-family:'Manrope';font-size:24px;letter-spacing:-.04em}.proof span{display:block;color:rgba(255,255,255,.48);font-size:12px;margin-top:4px}
 
-  section{position:relative;}
-  .pad{padding:110px 0;}
-  @media(max-width:640px){.pad{padding:72px 0;}}
-  .head{max-width:620px; margin-bottom:60px;}
-  .head .eyebrow{margin-bottom:18px;}
-  .head h2{font-size:clamp(28px,3.4vw,40px); font-weight:500; line-height:1.15; margin-bottom:16px;}
-  .head p{font-size:16px; color:var(--ink-soft); line-height:1.65;}
+    /* SECTIONS */
+    section{padding:115px 0}.section-head{display:flex;justify-content:space-between;gap:40px;align-items:end;margin-bottom:54px}.section-head>div:first-child{max-width:680px}.section-head .eyebrow{margin-bottom:18px}
+    h2{font-size:clamp(34px,4.3vw,56px);margin-bottom:18px}.lead{color:var(--muted);font-size:16px;max-width:650px}
 
-  /* SERVICES */
-  .services{background:var(--paper);}
-  .svc-list{border-top:1px solid var(--line);}
-  .svc-row{
-    display:grid; grid-template-columns:90px 1fr 1fr; gap:40px;
-    padding:38px 0; border-bottom:1px solid var(--line);
-    align-items:start; transition:background .2s ease;
-  }
-  @media(max-width:760px){.svc-row{grid-template-columns:1fr; gap:12px;}}
-  .svc-row:hover{background:rgba(47,93,80,0.035);}
-  .svc-num{font-family:'IBM Plex Mono'; font-size:13px; color:var(--forest); padding-top:6px;}
-  .svc-row h3{font-size:23px; font-weight:500;}
-  .svc-row p{font-size:14.5px; color:var(--ink-soft); line-height:1.65; margin-bottom:10px;}
-  .svc-link{font-size:13px; font-weight:600; color:var(--forest-dark); display:inline-flex; gap:6px;}
+    /* INTRO */
+    .intro{background:var(--surface)}.intro-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:80px;align-items:center}
+    .intro-copy h2{margin-bottom:24px}.intro-copy p{color:var(--muted);font-size:17px;line-height:1.8;margin-bottom:28px}
+    .quote{padding:34px;border-left:3px solid var(--gold);background:var(--bg);border-radius:0 var(--radius) var(--radius) 0;font-family:'Manrope';font-weight:600;font-size:21px;line-height:1.45;letter-spacing:-.03em}
+    .visual{min-height:430px;border-radius:28px;background:linear-gradient(145deg,#0b211a,#174b3c);position:relative;overflow:hidden;box-shadow:var(--shadow)}
+    .visual:before{content:'N';position:absolute;font-family:'Manrope';font-weight:800;font-size:330px;line-height:1;color:rgba(255,255,255,.035);right:-20px;bottom:-80px}
+    .bridge{position:absolute;left:12%;right:12%;bottom:18%;height:160px;border-top:2px solid rgba(215,184,115,.8);border-radius:50% 50% 0 0;transform:perspective(500px) rotateX(15deg)}
+    .bridge:before,.bridge:after{content:'';position:absolute;top:-1px;width:1px;height:150px;background:rgba(215,184,115,.42)}.bridge:before{left:28%}.bridge:after{right:28%}
+    .visual-card{position:absolute;top:32px;left:32px;right:32px;padding:22px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.13);backdrop-filter:blur(10px);border-radius:16px}.visual-card small{color:#9fc4b5;font-size:10px;text-transform:uppercase;letter-spacing:.14em}.visual-card strong{display:block;color:white;font-family:'Manrope';font-size:24px;margin-top:8px}
 
-  /* PROCESS - numbered because it's a real sequence */
-  .process{background:var(--ink); color:var(--paper);}
-  .process .head p{color:rgba(251,250,247,0.62);}
-  .process .eyebrow{color:#8FBBA9;}
-  .proc-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:rgba(251,250,247,0.14);}
-  @media(max-width:900px){.proc-grid{grid-template-columns:repeat(2,1fr);}}
-  @media(max-width:560px){.proc-grid{grid-template-columns:1fr;}}
-  .proc-cell{background:var(--ink); padding:36px 28px; min-height:220px; display:flex; flex-direction:column; justify-content:space-between;}
-  .proc-cell .step{font-family:'Fraunces'; font-size:15px; color:#8FBBA9; font-style:italic;}
-  .proc-cell h3{font-size:19px; font-weight:500; margin:22px 0 10px;}
-  .proc-cell p{font-size:13.5px; color:rgba(251,250,247,0.6); line-height:1.6;}
+    /* SERVICES */
+    .services{background:var(--bg)}.service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .service{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:30px;min-height:300px;display:flex;flex-direction:column;transition:.3s ease;position:relative;overflow:hidden}
+    .service:hover{transform:translateY(-7px);border-color:rgba(18,59,48,.28);box-shadow:var(--shadow)}
+    .service:after{content:'';position:absolute;width:120px;height:120px;border-radius:50%;background:var(--mint);right:-50px;top:-50px;opacity:.55}
+    .service-no{font-family:'Manrope';font-weight:800;font-size:12px;color:var(--forest-2);margin-bottom:40px;position:relative;z-index:1}.service h3{font-family:'Manrope';font-size:22px;letter-spacing:-.035em;margin-bottom:12px;position:relative;z-index:1}.service p{color:var(--muted);font-size:14px;line-height:1.7;position:relative;z-index:1}.service-link{margin-top:auto;padding-top:25px;font-weight:700;font-size:13px;color:var(--forest-2)}
 
-  /* TESTIMONIALS */
-  .testi-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
-  @media(max-width:860px){.testi-grid{grid-template-columns:1fr;}}
-  .testi-card{background:var(--paper); padding:36px 30px; display:flex; flex-direction:column; justify-content:space-between; min-height:260px;}
-  .testi-card .quote-mark{font-family:'Fraunces'; font-size:44px; color:var(--forest); font-style:italic; line-height:1; margin-bottom:10px;}
-  .testi-card p{font-size:15px; line-height:1.65; color:var(--ink); margin-bottom:22px;}
-  .testi-person{font-size:13px;}
-  .testi-name{font-weight:600;}
-  .testi-role{color:var(--ink-faint); margin-top:2px;}
+    /* PROCESS */
+    .dark{background:var(--ink);color:var(--white)}.dark .eyebrow{color:#a7cbbd}.dark .lead{color:rgba(255,255,255,.56)}.dark h2{max-width:700px}
+    .process-grid{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid rgba(255,255,255,.12);border-radius:24px;overflow:hidden}
+    .process{padding:32px 26px;min-height:300px;border-right:1px solid rgba(255,255,255,.12);display:flex;flex-direction:column}.process:last-child{border:0}.process .num{font-family:'Manrope';font-weight:800;font-size:12px;color:#d7b873}.process h3{font-family:'Manrope';font-size:20px;letter-spacing:-.03em;margin:55px 0 12px}.process p{font-size:13.5px;color:rgba(255,255,255,.54);line-height:1.7;margin-top:auto}
 
-  /* BLOG */
-  .blog-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:30px;}
-  @media(max-width:860px){.blog-grid{grid-template-columns:1fr;}}
-  .blog-card{border-top:2px solid var(--ink);}
-  .blog-thumb{aspect-ratio:16/10; background:linear-gradient(150deg,var(--stone-2),var(--forest) 130%); margin-bottom:18px; opacity:0.9;}
-  .blog-tag{font-family:'IBM Plex Mono'; font-size:11px; color:var(--forest-dark); text-transform:uppercase; letter-spacing:0.06em;}
-  .blog-card h3{font-size:19px; font-weight:500; margin:10px 0 8px; line-height:1.3;}
-  .blog-card p{font-size:13.5px; color:var(--ink-soft); line-height:1.6;}
-  .blog-meta{font-size:12px; color:var(--ink-faint); margin-top:14px;}
+    /* RESULTS */
+    .results{background:var(--surface)}.result-layout{display:grid;grid-template-columns:.8fr 1.2fr;gap:70px;align-items:start}.result-statement{font-family:'Manrope';font-weight:700;font-size:31px;line-height:1.2;letter-spacing:-.04em}.result-list{border-top:1px solid var(--line)}.result-row{display:grid;grid-template-columns:110px 1fr;gap:30px;padding:25px 0;border-bottom:1px solid var(--line)}.result-row strong{font-family:'Manrope';font-size:28px;letter-spacing:-.04em;color:var(--forest)}.result-row h3{font-family:'Manrope';font-size:16px;margin-bottom:5px}.result-row p{font-size:13.5px;color:var(--muted)}
 
-  /* BOOKING */
-  .booking{background:var(--paper);}
-  .booking-grid{display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:start;}
-  @media(max-width:900px){.booking-grid{grid-template-columns:1fr; gap:40px;}}
-  .booking-list li{display:flex; gap:12px; font-size:14.5px; color:var(--ink-soft); padding:16px 0; border-bottom:1px solid var(--line);}
-  .booking-list li:first-child{padding-top:0;}
-  .tick{color:var(--forest); font-weight:700;}
-  .form{display:flex; flex-direction:column; gap:16px;}
-  .field label{display:block; font-size:12.5px; font-weight:600; text-transform:uppercase; letter-spacing:0.05em; color:var(--ink-faint); margin-bottom:8px;}
-  .field input,.field select,.field textarea{
-    width:100%; padding:13px 14px; border:1px solid var(--line); background:var(--stone);
-    font-family:'Work Sans'; font-size:14.5px; color:var(--ink); border-radius:2px;
-  }
-  .field input:focus,.field select:focus,.field textarea:focus{outline:2px solid var(--forest); outline-offset:1px;}
-  .field-row{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
-  @media(max-width:520px){.field-row{grid-template-columns:1fr;}}
+    /* CTA */
+    .cta{padding:95px 0;background:linear-gradient(135deg,#123b30,#0b241c);color:var(--white);position:relative;overflow:hidden}.cta:before{content:'';position:absolute;width:500px;height:500px;border:1px solid rgba(255,255,255,.08);border-radius:50%;right:-160px;top:-260px}.cta-inner{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:50px}.cta h2{max-width:700px;margin:0 0 12px}.cta p{color:rgba(255,255,255,.62);max-width:600px}.cta-actions{display:flex;gap:12px;flex-shrink:0}
 
-  /* CTA banner */
-  .cta-band{background:var(--forest-dark); color:var(--paper); text-align:center; padding:90px 0;}
-  .cta-band h2{font-size:clamp(28px,4vw,42px); font-weight:500; max-width:600px; margin:0 auto 16px;}
-  .cta-band p{color:rgba(251,250,247,0.7); font-size:15.5px; margin-bottom:32px;}
-  .cta-band .btn-outline{border-color:rgba(251,250,247,0.4); color:var(--paper);}
-  .cta-band .btn-outline:hover{background:var(--paper); color:var(--forest-dark);}
+    /* CONTACT */
+    .contact{background:var(--bg)}.contact-grid{display:grid;grid-template-columns:.75fr 1.25fr;gap:80px}.contact h2{margin-bottom:18px}.contact-note{color:var(--muted);font-size:15px;line-height:1.75}.contact-card{background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:34px;box-shadow:0 15px 45px rgba(11,23,19,.06)}.form{display:grid;gap:17px}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:17px}.field label{display:block;font-size:11px;font-weight:800;letter-spacing:.11em;text-transform:uppercase;margin-bottom:8px;color:var(--muted)}.field input,.field textarea,.field select{width:100%;border:1px solid var(--line);background:var(--bg);border-radius:12px;padding:14px 15px;color:var(--ink);outline:none;transition:.2s}.field textarea{min-height:135px;resize:vertical}.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--forest);box-shadow:0 0 0 3px rgba(18,59,48,.08)}.form button{width:100%}.form-status{font-size:13px;color:var(--forest);display:none;padding-top:3px}
 
-  footer{background:var(--ink); color:rgba(251,250,247,0.7); padding:70px 0 32px;}
-  .footer-grid{display:grid; grid-template-columns:1.4fr repeat(3,1fr); gap:32px; margin-bottom:50px;}
-  @media(max-width:760px){.footer-grid{grid-template-columns:repeat(2,1fr);}}
-  .footer-grid h4{font-size:12px; text-transform:uppercase; letter-spacing:0.06em; color:rgba(251,250,247,0.45); margin-bottom:16px;}
-  .footer-grid ul{display:flex; flex-direction:column; gap:10px;}
-  .footer-grid a{font-size:14px; color:rgba(251,250,247,0.75);}
-  .footer-grid a:hover{color:#8FBBA9;}
-  .footer-logo{font-family:'Fraunces'; font-size:20px; color:var(--paper); margin-bottom:14px;}
-  .footer-bottom{display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; padding-top:26px; border-top:1px solid rgba(251,250,247,0.14); font-size:12.5px; color:rgba(251,250,247,0.4);}
+    footer{background:#07100d;color:rgba(255,255,255,.65);padding:65px 0 25px}.footer-top{display:grid;grid-template-columns:1.6fr repeat(3,1fr);gap:40px;padding-bottom:55px}.footer-brand{color:white;font-family:'Manrope';font-weight:800;font-size:20px;margin-bottom:13px}.footer-about{max-width:330px;font-size:13px;line-height:1.7}.footer-col h4{color:rgba(255,255,255,.4);font-size:10px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:16px}.footer-col a{display:block;font-size:13px;margin:9px 0;transition:.2s}.footer-col a:hover{color:white}.footer-bottom{border-top:1px solid rgba(255,255,255,.10);padding-top:22px;display:flex;justify-content:space-between;gap:20px;font-size:11px;color:rgba(255,255,255,.38)}
 
-  .reveal{opacity:0; transform:translateY(22px); transition:opacity .6s ease, transform .6s ease;}
-  .reveal.in{opacity:1; transform:translateY(0);}
-</style>
+    .reveal{opacity:0;transform:translateY(20px);transition:.7s ease}.reveal.visible{opacity:1;transform:none}
+    @media(max-width:900px){.links{display:none}.menu-toggle{display:grid;place-items:center}.mobile-menu{position:fixed;inset:0;background:rgba(7,16,13,.98);color:white;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:25px;font-family:'Manrope';font-size:28px;transform:translateY(-100%);transition:.35s ease}.mobile-menu.open{transform:none}.mobile-menu button{position:absolute;top:22px;right:24px;background:none;border:0;color:white;font-size:28px}.mobile-menu a{opacity:.9}.service-grid{grid-template-columns:1fr 1fr}.process-grid{grid-template-columns:1fr 1fr}.process:nth-child(2){border-right:0}.process:nth-child(-n+2){border-bottom:1px solid rgba(255,255,255,.12)}.intro-grid,.result-layout,.contact-grid{grid-template-columns:1fr;gap:45px}.cta-inner{flex-direction:column;align-items:flex-start}.footer-top{grid-template-columns:1fr 1fr}}
+    @media(max-width:600px){.container{width:min(var(--max),calc(100% - 32px))}section{padding:80px 0}.hero{min-height:720px;padding:135px 0 70px}.hero-copy{font-size:16px}.hero-proof{margin-top:55px;flex-wrap:wrap}.proof{flex:0 0 50%;padding:0 15px 15px 0;margin-bottom:12px}.proof:nth-child(2){border:0;padding-left:15px}.proof:nth-child(3){border-top:1px solid rgba(255,255,255,.12);padding-top:15px}.section-head{display:block;margin-bottom:38px}.service-grid,.process-grid{grid-template-columns:1fr}.process{border-right:0!important;border-bottom:1px solid rgba(255,255,255,.12)!important;min-height:230px}.process:last-child{border-bottom:0!important}.form-row{grid-template-columns:1fr}.footer-top{grid-template-columns:1fr;gap:30px}.footer-bottom{flex-direction:column}.cta-actions{width:100%;flex-direction:column}.cta-actions .btn{width:100%}.visual{min-height:340px}}
+  </style>
 </head>
 <body>
-
-<nav id="nav">
-  <div class="wrap nav-inner">
-    <div class="logo">Northbridge <em>Advisory</em></div>
-    <div class="nav-links">
-      <a href="#services">Υπηρεσίες</a>
-      <a href="#process">Πώς δουλεύουμε</a>
-      <a href="#insights">Insights</a>
-      <a href="#booking">Επικοινωνία</a>
+  <header id="header">
+    <div class="container nav">
+      <a class="brand" href="#top" aria-label="Northbridge Advisory home"><span class="brand-mark"></span>Northbridge <span style="font-weight:500;opacity:.55">Advisory</span></a>
+      <nav class="links" aria-label="Main navigation">
+        <a href="#approach">Approach</a><a href="#services">Services</a><a href="#results">Perspective</a><a href="#contact">Contact</a>
+      </nav>
+      <a class="btn btn-primary nav-cta" href="#contact">Start a conversation <span class="arrow">→</span></a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu">☰</button>
     </div>
-    <a href="#booking" class="btn btn-primary">Κλείσε ραντεβού</a>
+  </header>
+  <div class="mobile-menu" id="mobileMenu">
+    <button id="menuClose" aria-label="Close menu">×</button>
+    <a href="#approach">Approach</a><a href="#services">Services</a><a href="#results">Perspective</a><a href="#contact">Contact</a>
   </div>
-</nav>
 
-<section class="hero">
-  <div class="bridge-art">
-    <svg viewBox="0 0 1600 500" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,420 Q400,120 800,300 Q1200,480 1600,260" stroke="rgba(251,250,247,0.16)" stroke-width="2" fill="none"/>
-      <path d="M0,460 Q400,190 800,350 Q1200,500 1600,320" stroke="rgba(251,250,247,0.10)" stroke-width="2" fill="none"/>
-      <g stroke="rgba(251,250,247,0.14)" stroke-width="1.5">
-        <line x1="120" y1="420" x2="120" y2="500"/>
-        <line x1="260" y1="330" x2="260" y2="500"/>
-        <line x1="400" y1="260" x2="400" y2="500"/>
-        <line x1="540" y1="220" x2="540" y2="500"/>
-        <line x1="680" y1="230" x2="680" y2="500"/>
-        <line x1="820" y1="280" x2="820" y2="500"/>
-        <line x1="960" y1="360" x2="960" y2="500"/>
-        <line x1="1100" y1="410" x2="1100" y2="500"/>
-        <line x1="1240" y1="380" x2="1240" y2="500"/>
-        <line x1="1380" y1="310" x2="1380" y2="500"/>
-        <line x1="1520" y1="270" x2="1520" y2="500"/>
-      </g>
-      <rect x="380" y="60" width="16" height="440" fill="rgba(251,250,247,0.07)"/>
-      <rect x="1220" y="60" width="16" height="440" fill="rgba(251,250,247,0.07)"/>
-    </svg>
-  </div>
-  <div class="hero-grain"></div>
-  <div class="wrap">
-    <div class="hero-inner">
-      <div>
-        <div class="eyebrow">Στρατηγική Συμβουλευτική</div>
-        <h1>Καθαρή σκέψη<br>για <em>σύνθετες</em><br>επιχειρηματικές αποφάσεις.</h1>
+  <main id="top">
+    <section class="hero">
+      <div class="grid-lines"></div><div class="hero-orbit"></div>
+      <div class="container hero-content">
+        <span class="eyebrow">Independent strategy advisory</span>
+        <h1 class="display">Clarity for the decisions that <span class="accent">move a business.</span></h1>
+        <p class="hero-copy">Northbridge Advisory helps ambitious leaders turn complex business questions into focused strategy, decisive action and measurable progress.</p>
+        <div class="hero-actions"><a class="btn btn-primary" href="#contact">Explore an engagement <span class="arrow">→</span></a><a class="btn btn-light" href="#services">What we do</a></div>
+        <div class="hero-proof"><div class="proof"><strong>Strategy</strong><span>Built around the decision, not the deck.</span></div><div class="proof"><strong>Focus</strong><span>Fewer priorities. Stronger execution.</span></div><div class="proof"><strong>Momentum</strong><span>From insight to action without the drift.</span></div></div>
       </div>
-      <div class="hero-side">
-        <p>Η Northbridge βοηθά ηγετικές ομάδες να πάρουν αποφάσεις με σιγουριά — από αναδιάρθρωση λειτουργιών μέχρι είσοδο σε νέες αγορές. Χωρίς περιττή θεωρία, μόνο ό,τι κινεί το αποτέλεσμα.</p>
-        <div class="hero-actions">
-          <a href="#booking" class="btn btn-primary">Κλείσε ένα πρώτο ραντεβού</a>
-          <a href="#services" class="btn btn-outline">Δες τις υπηρεσίες</a>
+    </section>
+
+    <section class="intro" id="approach">
+      <div class="container intro-grid">
+        <div class="intro-copy reveal"><span class="eyebrow">The Northbridge approach</span><h2 class="display">A bridge between where you are and where the business needs to go.</h2><p>Good strategy is not about producing more analysis. It is about making the right choices with confidence — and creating an organization capable of acting on them.</p><div class="quote">“The best strategy makes the next important decision easier.”</div></div>
+        <div class="visual reveal" aria-hidden="true"><div class="visual-card"><small>Strategic lens</small><strong>Direction → choices → execution</strong></div><div class="bridge"></div></div>
+      </div>
+    </section>
+
+    <section class="services" id="services">
+      <div class="container"><div class="section-head reveal"><div><span class="eyebrow">Capabilities</span><h2 class="display">Strategy that gets closer to the work.</h2><p class="lead">From growth questions to operating-model decisions, we bring structure to the moments that matter.</p></div></div>
+        <div class="service-grid">
+          <article class="service reveal"><div class="service-no">01 / GROWTH</div><h3>Growth Strategy</h3><p>Identify the markets, customers and moves with the strongest path to sustainable growth.</p><a class="service-link" href="#contact">Discuss growth →</a></article>
+          <article class="service reveal"><div class="service-no">02 / POSITION</div><h3>Market & Competitive Strategy</h3><p>Turn market signals and competitive dynamics into a clear position and a defensible point of view.</p><a class="service-link" href="#contact">Discuss positioning →</a></article>
+          <article class="service reveal"><div class="service-no">03 / TRANSFORM</div><h3>Business Transformation</h3><p>Translate ambition into a practical roadmap across operating model, capabilities, technology and change.</p><a class="service-link" href="#contact">Discuss transformation →</a></article>
+          <article class="service reveal"><div class="service-no">04 / DECIDE</div><h3>Strategic Decision Support</h3><p>Pressure-test high-stakes choices with structured thinking, scenarios and explicit trade-offs.</p><a class="service-link" href="#contact">Bring a decision →</a></article>
+          <article class="service reveal"><div class="service-no">05 / EXECUTE</div><h3>Execution & Performance</h3><p>Build the priorities, metrics and governance that turn strategy into visible progress.</p><a class="service-link" href="#contact">Discuss execution →</a></article>
+          <article class="service reveal"><div class="service-no">06 / ADVISORY</div><h3>Leadership Advisory</h3><p>A senior sounding board for founders and executives navigating moments of uncertainty or change.</p><a class="service-link" href="#contact">Start a conversation →</a></article>
         </div>
       </div>
-    </div>
-    <div class="hero-strip reveal">
-      <div class="strip-item"><div class="num">120+</div><div class="label">Έργα συμβουλευτικής ολοκληρωμένα</div></div>
-      <div class="strip-item"><div class="num">18</div><div class="label">Χρόνια εμπειρίας στην αγορά</div></div>
-      <div class="strip-item"><div class="num">94%</div><div class="label">Πελάτες που επανασυνεργάζονται</div></div>
-      <div class="strip-item"><div class="num">6</div><div class="label">Κλάδοι εξειδίκευσης</div></div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<section id="services" class="services pad">
-  <div class="wrap">
-    <div class="head reveal">
-      <div class="eyebrow">Υπηρεσίες</div>
-      <h2>Έξι τρόποι που σας βοηθάμε να προχωρήσετε</h2>
-      <p>Κάθε υπηρεσία έχει τη δική της αφιερωμένη ομάδα, μεθοδολογία και ιστορικό έργων — χωρίς γενικόλογες λύσεις.</p>
-    </div>
-    <div class="svc-list reveal">
-      <div class="svc-row">
-        <div class="svc-num">01</div>
-        <div><h3>Επιχειρηματική Στρατηγική</h3></div>
-        <div><p>Χαρτογράφηση αγοράς, ανταγωνιστική ανάλυση και σχέδιο 3ετίας με μετρήσιμους στόχους ανά τρίμηνο.</p><a href="#" class="svc-link">Μάθε περισσότερα →</a></div>
-      </div>
-      <div class="svc-row">
-        <div class="svc-num">02</div>
-        <div><h3>Λειτουργική Αναδιάρθρωση</h3></div>
-        <div><p>Επανασχεδιασμός διαδικασιών και οργανογράμματος για μείωση κόστους χωρίς απώλεια ταχύτητας.</p><a href="#" class="svc-link">Μάθε περισσότερα →</a></div>
-      </div>
-      <div class="svc-row">
-        <div class="svc-num">03</div>
-        <div><h3>Χρηματοοικονομική Συμβουλευτική</h3></div>
-        <div><p>Μοντελοποίηση, προϋπολογισμός και προετοιμασία για γύρους χρηματοδότησης ή έξοδο.</p><a href="#" class="svc-link">Μάθε περισσότερα →</a></div>
-      </div>
-      <div class="svc-row">
-        <div class="svc-num">04</div>
-        <div><h3>Είσοδος σε Νέες Αγορές</h3></div>
-        <div><p>Έρευνα σκοπιμότητας, ρυθμιστικό πλαίσιο και σχέδιο εισόδου προσαρμοσμένο στην τοπική αγορά.</p><a href="#" class="svc-link">Μάθε περισσότερα →</a></div>
-      </div>
-      <div class="svc-row">
-        <div class="svc-num">05</div>
-        <div><h3>Ηγεσία & Οργανωτική Κουλτούρα</h3></div>
-        <div><p>Coaching στελεχών, σχεδιασμός διαδοχής και ευθυγράμμιση ομάδων γύρω από κοινό όραμα.</p><a href="#" class="svc-link">Μάθε περισσότερα →</a></div>
-      </div>
-      <div class="svc-row">
-        <div class="svc-num">06</div>
-        <div><h3>Διαχείριση Κρίσεων</h3></div>
-        <div><p>Άμεση παρέμβαση σε περιόδους πίεσης — ρευστότητα, φήμη ή απώλεια βασικών πελατών.</p><a href="#" class="svc-link">Μάθε περισσότερα →</a></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="process" class="process pad">
-  <div class="wrap">
-    <div class="head reveal">
-      <div class="eyebrow">Μεθοδολογία</div>
-      <h2>Πώς δουλεύουμε, βήμα προς βήμα</h2>
-      <p>Ίδια πειθαρχημένη διαδικασία σε κάθε έργο, ώστε να ξέρετε τι να περιμένετε σε κάθε φάση.</p>
-    </div>
-    <div class="proc-grid reveal">
-      <div class="proc-cell"><div class="step">Βήμα 01</div><div><h3>Διάγνωση</h3><p>Συνεντεύξεις, ανάλυση δεδομένων και εντοπισμός των πραγματικών σημείων τριβής.</p></div></div>
-      <div class="proc-cell"><div class="step">Βήμα 02</div><div><h3>Σχεδιασμός</h3><p>Διαμόρφωση σεναρίων λύσης με σαφές κόστος, ρίσκο και χρονοδιάγραμμα για καθένα.</p></div></div>
-      <div class="proc-cell"><div class="step">Βήμα 03</div><div><h3>Εφαρμογή</h3><p>Συνεργασία με την ομάδα σας στην υλοποίηση, με εβδομαδιαία σημεία ελέγχου.</p></div></div>
-      <div class="proc-cell"><div class="step">Βήμα 04</div><div><h3>Παρακολούθηση</h3><p>Μέτρηση αποτελεσμάτων στους πρώτους 6 μήνες και προσαρμογές όπου χρειάζεται.</p></div></div>
-    </div>
-  </div>
-</section>
-
-<section class="pad">
-  <div class="wrap">
-    <div class="head reveal">
-      <div class="eyebrow">Εμπιστοσύνη</div>
-      <h2>Τι λένε οι πελάτες μας</h2>
-    </div>
-    <div class="testi-grid reveal">
-      <div class="testi-card">
-        <div><div class="quote-mark">"</div><p>Μέσα σε 4 μήνες μειώσαμε το λειτουργικό κόστος κατά 22% χωρίς απολύσεις. Η ομάδα κατάλαβε την επιχείρησή μας βαθιά, όχι επιφανειακά.</p></div>
-        <div class="testi-person"><div class="testi-name">Δ. Καραγιάννης</div><div class="testi-role">CEO, βιομηχανία τροφίμων</div></div>
-      </div>
-      <div class="testi-card">
-        <div><div class="quote-mark">"</div><p>Το σχέδιο εισόδου στη γερμανική αγορά που μας έδωσαν ήταν τόσο συγκεκριμένο που το εφαρμόσαμε αυτούσιο. Πραγματική τεχνογνωσία.</p></div>
-        <div class="testi-person"><div class="testi-name">Μ. Αντωνίου</div><div class="testi-role">COO, εταιρεία logistics</div></div>
-      </div>
-      <div class="testi-card">
-        <div><div class="quote-mark">"</div><p>Σε μια περίοδο κρίσης, ήταν η πιο ήρεμη και μεθοδική φωνή στο δωμάτιο. Μας βοήθησαν να πάρουμε αποφάσεις χωρίς πανικό.</p></div>
-        <div class="testi-person"><div class="testi-name">Ε. Παπαδάκη</div><div class="testi-role">Ιδρύτρια, retail αλυσίδα</div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="insights" class="pad" style="background:var(--paper);">
-  <div class="wrap">
-    <div class="head reveal">
-      <div class="eyebrow">Insights</div>
-      <h2>Πρόσφατες σκέψεις από την ομάδα μας</h2>
-      <p>Άρθρα και αναλύσεις πάνω σε ό,τι βλέπουμε να αλλάζει στην αγορά.</p>
-    </div>
-    <div class="blog-grid reveal">
-      <div class="blog-card">
-        <div class="blog-thumb"></div>
-        <div class="blog-tag">Στρατηγική</div>
-        <h3>Πότε αξίζει μια αναδιάρθρωση και πότε όχι</h3>
-        <p>Τρία ερωτήματα που πρέπει να απαντήσει κάθε διοίκηση πριν ξεκινήσει αλλαγές.</p>
-        <div class="blog-meta">12 Αυγούστου 2026 · 6 λεπτά ανάγνωση</div>
-      </div>
-      <div class="blog-card">
-        <div class="blog-thumb" style="background:linear-gradient(150deg,var(--stone-2),var(--gold) 130%);"></div>
-        <div class="blog-tag">Χρηματοοικονομικά</div>
-        <h3>Προετοιμασία για γύρο χρηματοδότησης σε δύσκολη αγορά</h3>
-        <p>Τι ψάχνουν πραγματικά οι επενδυτές το 2026 και πώς να το δείξετε στο δικό σας deck.</p>
-        <div class="blog-meta">3 Αυγούστου 2026 · 8 λεπτά ανάγνωση</div>
-      </div>
-      <div class="blog-card">
-        <div class="blog-thumb" style="background:linear-gradient(150deg,var(--stone-2),var(--forest-dark) 130%);"></div>
-        <div class="blog-tag">Ηγεσία</div>
-        <h3>Γιατί οι καλές ομάδες διαλύονται μετά την ανάπτυξη</h3>
-        <p>Τα σημάδια που δείχνουν ότι η κουλτούρα σας χρειάζεται επανασχεδιασμό πριν είναι αργά.</p>
-        <div class="blog-meta">28 Ιουλίου 2026 · 5 λεπτά ανάγνωση</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="booking" class="booking pad">
-  <div class="wrap">
-    <div class="booking-grid">
-      <div class="reveal">
-        <div class="eyebrow">Ραντεβού</div>
-        <h2 style="font-size:clamp(26px,3vw,36px); font-weight:500; margin-bottom:20px;">Κλείσε ένα πρώτο, δωρεάν ραντεβού 30 λεπτών</h2>
-        <p style="color:var(--ink-soft); font-size:15px; line-height:1.65; margin-bottom:28px;">Θα μιλήσουμε για την πρόκληση που αντιμετωπίζετε και θα σας πούμε ειλικρινά αν μπορούμε να βοηθήσουμε — χωρίς δέσμευση.</p>
-        <ul class="booking-list">
-          <li><span class="tick">✓</span>Απάντηση εντός 1 εργάσιμης ημέρας</li>
-          <li><span class="tick">✓</span>Καμία υποχρέωση μετά το πρώτο ραντεβού</li>
-          <li><span class="tick">✓</span>Συνάντηση διά ζώσης ή online, όπως προτιμάτε</li>
-        </ul>
-      </div>
-      <form class="form reveal" onsubmit="event.preventDefault(); alert('Ευχαριστούμε! Θα επικοινωνήσουμε σύντομα.');">
-        <div class="field-row">
-          <div class="field"><label for="fname">Όνομα</label><input id="fname" type="text" required></div>
-          <div class="field"><label for="lname">Επώνυμο</label><input id="lname" type="text" required></div>
+    <section class="dark" id="process">
+      <div class="container"><div class="section-head reveal"><div><span class="eyebrow">How we work</span><h2 class="display">Structured enough to be rigorous. Practical enough to use.</h2><p class="lead">Every engagement is shaped around the decision and outcome you need — not a fixed consulting template.</p></div></div>
+        <div class="process-grid">
+          <article class="process reveal"><span class="num">01 — FRAME</span><h3>Define the real question</h3><p>Align on the decision, ambition, constraints and facts that actually matter.</p></article>
+          <article class="process reveal"><span class="num">02 — DIAGNOSE</span><h3>Find what changes the answer</h3><p>Test the key hypotheses and separate signal from noise.</p></article>
+          <article class="process reveal"><span class="num">03 — CHOOSE</span><h3>Make the trade-offs explicit</h3><p>Develop clear strategic choices and stress-test them against reality.</p></article>
+          <article class="process reveal"><span class="num">04 — MOVE</span><h3>Turn choices into action</h3><p>Translate strategy into priorities, owners, measures and momentum.</p></article>
         </div>
-        <div class="field"><label for="email">Email</label><input id="email" type="email" required></div>
-        <div class="field"><label for="topic">Θέμα ενδιαφέροντος</label>
-          <select id="topic">
-            <option>Επιχειρηματική Στρατηγική</option>
-            <option>Λειτουργική Αναδιάρθρωση</option>
-            <option>Χρηματοοικονομική Συμβουλευτική</option>
-            <option>Είσοδος σε Νέες Αγορές</option>
-            <option>Ηγεσία & Κουλτούρα</option>
-            <option>Διαχείριση Κρίσεων</option>
-          </select>
-        </div>
-        <div class="field"><label for="msg">Σύντομη περιγραφή</label><textarea id="msg" rows="4"></textarea></div>
-        <button type="submit" class="btn btn-primary" style="margin-top:6px;">Στείλε αίτημα ραντεβού</button>
-      </form>
-    </div>
-  </div>
-</section>
+      </div>
+    </section>
 
-<section class="cta-band">
-  <div class="wrap">
-    <h2>Έτοιμοι να λύσετε το επόμενο δύσκολο πρόβλημα;</h2>
-    <p>Η πρώτη κουβέντα είναι πάντα δωρεάν και χωρίς δέσμευση.</p>
-    <a href="#booking" class="btn btn-outline">Κλείσε ραντεβού τώρα</a>
-  </div>
-</section>
+    <section class="results" id="results">
+      <div class="container"><div class="result-layout"><div class="reveal"><span class="eyebrow">Our perspective</span><div class="result-statement">A strategy is only valuable when it changes what people do next.</div></div><div class="result-list reveal"><div class="result-row"><strong>01</strong><div><h3>Start with the decision</h3><p>Work backwards from the choice the leadership team needs to make.</p></div></div><div class="result-row"><strong>02</strong><div><h3>Prioritize relentlessly</h3><p>A small number of strategic moves usually create more value than a long list of initiatives.</p></div></div><div class="result-row"><strong>03</strong><div><h3>Make execution visible</h3><p>Clear owners, milestones and measures turn strategic intent into operating rhythm.</p></div></div><div class="result-row"><strong>04</strong><div><h3>Keep learning</h3><p>Good strategy evolves as evidence changes — without losing the direction.</p></div></div></div></div></div>
+    </section>
 
-<footer>
-  <div class="wrap">
-    <div class="footer-grid">
-      <div><div class="footer-logo">Northbridge Advisory</div><p style="font-size:13px; color:rgba(251,250,247,0.5); max-width:240px; line-height:1.6;">Στρατηγική συμβουλευτική για επιχειρήσεις που θέλουν να αποφασίζουν με σιγουριά.</p></div>
-      <div><h4>Υπηρεσίες</h4><ul><li><a href="#">Στρατηγική</a></li><li><a href="#">Αναδιάρθρωση</a></li><li><a href="#">Χρηματοοικονομικά</a></li><li><a href="#">Νέες Αγορές</a></li></ul></div>
-      <div><h4>Εταιρεία</h4><ul><li><a href="#">Σχετικά με εμάς</a></li><li><a href="#insights">Insights</a></li><li><a href="#">Καριέρα</a></li></ul></div>
-      <div><h4>Επικοινωνία</h4><ul><li><a href="#">info@northbridge.gr</a></li><li><a href="#">+30 210 000 0000</a></li><li><a href="#booking">Κλείσε ραντεβού</a></li></ul></div>
-    </div>
-    <div class="footer-bottom">
-      <span>© 2026 Northbridge Advisory. Με επιφύλαξη κάθε δικαιώματος.</span>
-      <span>Όροι Χρήσης · Απόρρητο</span>
-    </div>
-  </div>
-</footer>
+    <section class="cta"><div class="container cta-inner"><div><h2 class="display">Have a decision worth getting right?</h2><p>Bring the question. We will help you frame the problem, identify the options and define the next move.</p></div><div class="cta-actions"><a class="btn btn-primary" href="#contact">Start a conversation <span class="arrow">→</span></a><a class="btn btn-light" href="#services">View capabilities</a></div></div></section>
 
-<script>
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 20));
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-</script>
+    <section class="contact" id="contact">
+      <div class="container contact-grid"><div class="reveal"><span class="eyebrow">Get in touch</span><h2 class="display">Let's make the next move clearer.</h2><p class="contact-note">Tell us what you are working through. A short outline is enough — the first conversation is about understanding the problem, not selling a predefined solution.</p></div>
+        <div class="contact-card reveal"><form class="form" id="contactForm"><div class="form-row"><div class="field"><label for="name">Name</label><input id="name" name="name" required autocomplete="name" placeholder="Your name"></div><div class="field"><label for="company">Company</label><input id="company" name="company" autocomplete="organization" placeholder="Company name"></div></div><div class="form-row"><div class="field"><label for="email">Email</label><input id="email" type="email" name="email" required autocomplete="email" placeholder="you@company.com"></div><div class="field"><label for="topic">Topic</label><select id="topic" name="topic"><option>Growth strategy</option><option>Market & competitive strategy</option><option>Business transformation</option><option>Strategic decision support</option><option>Execution & performance</option><option>Leadership advisory</option></select></div></div><div class="field"><label for="message">What are you trying to solve?</label><textarea id="message" name="message" required placeholder="A few sentences about the situation, decision or goal..."></textarea></div><button class="btn btn-primary" type="submit">Prepare inquiry <span class="arrow">→</span></button><div class="form-status" id="formStatus">Thanks — your inquiry is ready. Connect this form to your preferred email/form service to receive submissions.</div></form></div>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="container"><div class="footer-top"><div><div class="footer-brand">Northbridge Advisory</div><p class="footer-about">Independent business strategy and advisory for leaders facing consequential decisions, growth opportunities and transformation.</p></div><div class="footer-col"><h4>Explore</h4><a href="#approach">Approach</a><a href="#services">Services</a><a href="#results">Perspective</a></div><div class="footer-col"><h4>Engage</h4><a href="#contact">Start a conversation</a><a href="#contact">Request an inquiry</a></div><div class="footer-col"><h4>Northbridge</h4><a href="#top">Back to top ↑</a></div></div><div class="footer-bottom"><span>© 2026 Northbridge Advisory. All rights reserved.</span><span>Strategy · Clarity · Momentum</span></div></div></footer>
+
+  <script>
+    const header=document.getElementById('header');
+    const menu=document.getElementById('mobileMenu');
+    const toggle=document.getElementById('menuToggle');
+    const close=document.getElementById('menuClose');
+    window.addEventListener('scroll',()=>header.classList.toggle('scrolled',window.scrollY>30),{passive:true});
+    function closeMenu(){menu.classList.remove('open');document.body.classList.remove('menu-open')}
+    toggle.addEventListener('click',()=>{menu.classList.add('open');document.body.classList.add('menu-open')});
+    close.addEventListener('click',closeMenu); menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));
+    const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.12});
+    document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+    document.getElementById('contactForm').addEventListener('submit',e=>{e.preventDefault();document.getElementById('formStatus').style.display='block';e.target.querySelector('button').textContent='Inquiry prepared ✓';});
+  </script>
 </body>
 </html>
